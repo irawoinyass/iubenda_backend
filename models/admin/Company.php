@@ -26,7 +26,7 @@ class Company
 
 
 
-    //Creating Company
+    //Create Company
 
     public function create()
     {
@@ -55,6 +55,59 @@ class Company
         $stmt->bindParam(':created_at', $this->created_at);
 
 
+
+        //Executing Statement
+        if ($stmt->execute()) {
+            return true;
+        }
+
+        //Error Translator
+
+        printf("Error: %s.\n", $stmt->error);
+
+
+        return false;
+
+        //End
+    }
+
+
+
+
+
+
+
+
+    //Update Company
+
+    public function update()
+    {
+        //Starts
+
+        //Query
+
+        $query = 'UPDATE ' . $this->table . ' SET company_name = :company_name, company_email = :company_email, company_phone = :company_phone, company_address = :company_address, company_website = :company_website WHERE company_id = :company_id';
+
+        //Statment preperation
+        $stmt = $this->conn->prepare($query);
+
+        $this->company_name = htmlspecialchars(strip_tags($this->company_name));
+        $this->company_email = htmlspecialchars(strip_tags($this->company_email));
+        $this->company_address = htmlspecialchars(strip_tags($this->company_address));
+        $this->company_phone = htmlspecialchars(strip_tags($this->company_phone));
+        $this->company_website = htmlspecialchars(strip_tags($this->company_website));
+
+        //Binding
+
+        $stmt->bindParam(':company_name', $this->company_name);
+        $stmt->bindParam(':company_email', $this->company_email);
+        $stmt->bindParam(':company_address', $this->company_address);
+        $stmt->bindParam(':company_phone', $this->company_phone);
+        $stmt->bindParam(':company_website', $this->company_website);
+        $stmt->bindParam(':company_id', $this->company_id);
+
+
+
         //Executing Statement
         if ($stmt->execute()) {
             return true;
@@ -69,6 +122,34 @@ class Company
 
         //Ends
     }
+
+
+
+
+    public function delete()
+    {
+
+        //Query
+        $query = 'DELETE FROM ' . $this->table . ' WHERE company_id = :company_id';
+
+        //Prepare
+
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(':company_id', $this->company_id);
+
+        if ($stmt->execute()) {
+            return true;
+        }
+
+        //Communicate Error;
+
+        printf("Error: %s.\n", $stmt->error);
+
+
+        return false;
+    }
+
 
 
 

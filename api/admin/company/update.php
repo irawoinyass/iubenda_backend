@@ -37,16 +37,17 @@ if ($data->name == "") {
 } else {
 
     //Declaration
+    $company->company_id = $data->company_id;
     $company->company_name = $data->name;
     $company->company_email = $data->email;
     $company->company_address = $data->address;
     $company->company_phone = $data->phone;
     $company->company_website = $data->website;
-    $company->created_at = date('Y-m-d H:i:s');
 
 
 
-    if ($company->create()) {
+
+    if ($company->update()) {
         echo json_encode(array('message' => 'success'));
     } else {
         echo json_encode(array('message' => 'Error, Please Try Again'));
