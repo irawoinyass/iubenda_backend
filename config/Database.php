@@ -6,7 +6,7 @@ class Database
     //Databate parameters
 
     private $host = 'localhost';
-    private $db_name = 'iubenda_db';
+    private $db_name = 'test';
     private $username = 'root';
     private $password = '';
     private $conn;
