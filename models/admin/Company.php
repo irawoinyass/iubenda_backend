@@ -44,7 +44,6 @@ class Company
         $this->company_address = htmlspecialchars(strip_tags($this->company_address));
         $this->company_phone = htmlspecialchars(strip_tags($this->company_phone));
         $this->company_website = htmlspecialchars(strip_tags($this->company_website));
-
         //Binding
 
         $stmt->bindParam(':company_name', $this->company_name);
