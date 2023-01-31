@@ -61,6 +61,34 @@ class Collaborator
 
 
 
+    //Delete
+
+    public function delete()
+    {
+
+        //Query
+        $query = 'DELETE FROM ' . $this->table . ' WHERE t_id = :t_id';
+
+        //Prepare
+
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(':t_id', $this->t_id);
+
+        if ($stmt->execute()) {
+            return true;
+        }
+
+        //Communicate Error;
+
+        printf("Error: %s.\n", $stmt->error);
+
+
+        return false;
+    }
+
+
+
 
 
 

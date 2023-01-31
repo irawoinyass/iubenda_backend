@@ -15,6 +15,7 @@ class Task
     public $collaborators;
     public $col_draft;
     public $solved;
+    public $p_id;
     public $created_at;
 
 
@@ -87,5 +88,65 @@ class Task
         $stmt->execute();
 
         return $stmt;
+    }
+
+
+
+    //List
+
+
+    public function list()
+    {
+
+        //Query
+        $query = 'SELECT task_id, headline, description, due_date, collaborators, col_draft, solved, tasks.created_at, collaborators.p_id FROM ' . $this->table . ' JOIN collaborators ON collaborators.t_id = task_id WHERE collaborators.p_id = :p_id GROUP BY task_id ORDER BY task_id DESC';
+
+        //Prepare statement
+
+        $stmt = $this->conn->prepare($query);
+
+        //Bind
+        $stmt->bindParam(':p_id', $this->p_id);
+
+        //Execute Query
+
+        $stmt->execute();
+
+        return $stmt;
+
+
+
+        //
+    }
+
+
+
+
+
+
+    //Delete
+
+    public function delete()
+    {
+
+        //Query
+        $query = 'DELETE FROM ' . $this->table . ' WHERE task_id = :task_id';
+
+        //Prepare
+
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(':task_id', $this->task_id);
+
+        if ($stmt->execute()) {
+            return true;
+        }
+
+        //Communicate Error;
+
+        printf("Error: %s.\n", $stmt->error);
+
+
+        return false;
     }
 }
