@@ -19,6 +19,8 @@ class People
     public $password;
     public $created_at;
     public $count;
+    public $collaborators;
+    public $collaborators2;
 
 
     //Contruction with Database
@@ -194,6 +196,24 @@ class People
         return false;
 
         //End
+    }
+
+
+
+    //Fetch people by email
+
+    public function fetch_users()
+    {
+        //Query
+        $query = 'SELECT people_id, com_id FROM ' . $this->table . ' WHERE email IN (' . $this->collaborators . ')';
+
+        //Prepare statement
+        $stmt = $this->conn->prepare($query);
+
+        //Execute Query
+        $stmt->execute($this->collaborators2);
+
+        return $stmt;
     }
 
 
