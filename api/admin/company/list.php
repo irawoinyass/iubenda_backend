@@ -5,18 +5,18 @@ header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 
 include('../../../config/Database.php');
-include('../../../models/admin/People.php');
+include('../../../models/admin/Company.php');
 
 //Database Instance
 $database = new Database();
 $db = $database->connect();
 
 
-//People Model Instance
-$people = new People($db);
+//Company Model Instance
+$company = new Company($db);
 
-//People Record Query
-$result = $people->list();
+//Company Record Query
+$result = $company->list();
 
 //Get Row Count
 $num = $result->rowCount();
@@ -27,37 +27,35 @@ if ($num > 0) {
 
     //users array
 
-    $people_arr = array();
-    $people_arr['data'] = array();
+    $company_arr = array();
+    $company_arr['data'] = array();
 
     while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
         //extraction
 
         extract($row);
 
-        $people_item = array(
+        $company_item = array(
 
-            'people_id' => $people_id,
-            'name' => $name,
-            'email' => $email,
-            'gender' => $gender,
-            'date_of_birth' => $date_of_birth,
+            'company_id' => $company_id,
             'company_name' => $company_name,
-            'com_id' => $com_id,
-            'position' => $position,
-            'account_status' => $account_status,
+            'company_email' => $company_email,
+            'company_phone' => $company_phone,
+            'company_address' => $company_address,
+            'company_website' => $company_website,
+            'people' => $people,
             'created_at' => $created_at
 
         );
 
         //Push to data
 
-        array_push($people_arr['data'], $people_item);
+        array_push($company_arr['data'], $company_item);
 
         //Converting it to JSON and OutPUT
 
     }
-    echo json_encode($people_arr);
+    echo json_encode($company_arr);
 } else {
 
     echo json_encode(['message' => 'NO RECORD FOUND']);

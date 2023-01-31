@@ -152,6 +152,30 @@ class Company
 
 
 
+    ///List
+
+    public function list()
+    {
+
+        //Query
+        $query = 'SELECT company_id, company_name, company_email, company_phone, company_address, company_website, company.created_at, COUNT(DISTINCT people_id) as people FROM ' . $this->table . ' LEFT JOIN people ON company_id = com_id GROUP BY company_id ORDER BY company_id DESC';
+
+        //Prepare statement
+
+        $stmt = $this->conn->prepare($query);
+
+        //Execute Query
+
+        $stmt->execute();
+
+        return $stmt;
+
+
+
+        //
+    }
+
+
 
 
 
