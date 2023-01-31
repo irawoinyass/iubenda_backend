@@ -89,7 +89,7 @@ class People
 
 
 
-    //Update Company
+    //Update Person
 
     public function update()
     {
