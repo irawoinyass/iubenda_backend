@@ -7,7 +7,7 @@ class Task
     private $table = 'tasks';
 
 
-    // Company Properties
+    // Task Properties
     public $task_id;
     public $headline;
     public $description;
@@ -148,5 +148,50 @@ class Task
 
 
         return false;
+    }
+
+
+
+    ///Update
+
+    public function update()
+    {
+        //Starts
+
+        //Query
+
+        $query = 'UPDATE ' . $this->table . ' SET headline = :headline, description = :description	, due_date = :due_date, solved = :solved WHERE task_id = :task_id';
+
+        //Statment preperation
+        $stmt = $this->conn->prepare($query);
+
+        $this->headline = htmlspecialchars(strip_tags($this->headline));
+        $this->description = htmlspecialchars(strip_tags($this->description));
+        $this->due_date = htmlspecialchars(strip_tags($this->due_date));
+        $this->solved = htmlspecialchars(strip_tags($this->solved));
+        //Binding
+
+        $stmt->bindParam(':task_id', $this->task_id);
+        $stmt->bindParam(':headline', $this->headline);
+        $stmt->bindParam(':description', $this->description);
+        $stmt->bindParam(':due_date', $this->due_date);
+        $stmt->bindParam(':solved', $this->solved);
+
+
+
+
+        //Executing Statement
+        if ($stmt->execute()) {
+            return true;
+        }
+
+        //Error Translator
+
+        printf("Error: %s.\n", $stmt->error);
+
+
+        return false;
+
+        //End
     }
 }

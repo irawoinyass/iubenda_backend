@@ -7,7 +7,7 @@ class Collaborator
     private $table = 'collaborators';
 
 
-    // Company Properties
+    // Collaborators Properties
     public $collaborator_id;
     public $t_id;
     public $p_id;

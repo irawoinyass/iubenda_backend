@@ -6,7 +6,7 @@ class People
     private $conn;
     private $table = 'people';
 
-    // Company Properties
+    // People Properties
     public $people_id;
     public $name;
     public $email;
