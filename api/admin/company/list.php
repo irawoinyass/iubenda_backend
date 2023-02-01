@@ -44,6 +44,7 @@ if ($num > 0) {
             'company_address' => $company_address,
             'company_website' => $company_website,
             'people' => $people,
+            'tasks' => $tasks,
             'created_at' => $created_at
 
         );
