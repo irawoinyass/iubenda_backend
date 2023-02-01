@@ -45,6 +45,7 @@ if ($num > 0) {
             'company_name' => $company_name,
             'com_id' => $com_id,
             'position' => $position,
+            'tasks' => $tasks,
             'account_status' => $account_status,
             'created_at' => $created_at
 
