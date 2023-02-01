@@ -16,3 +16,9 @@ Open your terminal in local project, and execute:
 ```
 composer install
 ```
+
+Now you need to open your phpmyadmin/database and create a database name
+
+```
+test
+```
