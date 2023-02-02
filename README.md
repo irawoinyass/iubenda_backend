@@ -23,8 +23,8 @@ Now you need to open your phpmyadmin/database and create a database name
 test
 ```
 
-Now Import the sql file in the project folder into the database you created
+Now Import the sql file from the project folder into the database you created
 
 ```
-<a href="https://github.com/irawoinyass/iubenda_backend/blob/develop/test.sql" download>test.sql</a>
+test.sql
 ```

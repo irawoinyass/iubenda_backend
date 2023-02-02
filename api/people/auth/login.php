@@ -30,16 +30,22 @@ $data = json_decode(file_get_contents("php://input"));
 $str = rand();
 $tokens = hash("sha256", $str);
 
+// Removing all illegal characters from email
+$email = filter_var($data->email, FILTER_SANITIZE_EMAIL);
+
+
 
 //Small Validation
-if ($data->email == "") {
+if ($email == "") {
     echo json_encode(array('message' => 'Email Field is required!'));
 } else if ($data->password == "") {
     echo json_encode(array('message' => 'Password Field is required!'));
+} else if (filter_var($email, FILTER_VALIDATE_EMAIL) == false) {
+    echo json_encode(array('message' => 'Invalid email address'));
 } else {
 
 
-    $user->email = $data->email;
+    $user->email = $email;
     $user->login();
 
 
