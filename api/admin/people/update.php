@@ -38,8 +38,6 @@ if ($data->name == "") {
     echo json_encode(array('message' => 'Position Field is required!'));
 } else if ($data->account_status == "") {
     echo json_encode(array('message' => 'Account Status Field is required!'));
-} else if ($data->password == "") {
-    echo json_encode(array('message' => 'Password Field is required!'));
 } else if ($data->people_id == "") {
     echo json_encode(array('message' => 'People ID is required!'));
 } else {
@@ -53,7 +51,13 @@ if ($data->name == "") {
     $people->com_id = $data->com_id;
     $people->position = $data->position;
     $people->account_status = $data->account_status;
-    $people->password = password_hash($data->password, PASSWORD_DEFAULT);
+
+    if ($data->password == '') {
+        $people->password = $data->old_password;
+    } else {
+        $people->password = password_hash($data->password, PASSWORD_DEFAULT);
+    }
+
 
 
     //echo json_encode(password_hash($data->password, PASSWORD_DEFAULT));

@@ -202,6 +202,45 @@ class People
 
 
 
+    //Getting Individual Record by ID
+
+    public function find()
+    {
+
+        //Query
+        $query = 'SELECT people_id, name, email, gender, date_of_birth, com_id, position, account_status, password, created_at FROM ' . $this->table . ' WHERE people_id = :people_id LIMIT 0,1';
+
+        //Prepare statement
+        $stmt = $this->conn->prepare($query);
+
+        //Bind ID
+        $stmt->bindParam(':people_id', $this->people_id);
+
+        //Execute Query
+        $stmt->execute();
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+        //Properties
+
+        $this->people_id = $row['people_id'];
+        $this->name = $row['name'];
+        $this->email = $row['email'];
+        $this->gender = $row['gender'];
+        $this->date_of_birth = $row['date_of_birth'];
+        $this->com_id = $row['com_id'];
+        $this->position = $row['position'];
+        $this->account_status = $row['account_status'];
+        $this->password = $row['password'];
+        $this->created_at = $row['created_at'];
+    }
+
+
+
+
+
+
 
 
 
