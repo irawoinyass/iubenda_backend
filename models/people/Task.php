@@ -194,4 +194,36 @@ class Task
 
         //End
     }
+
+
+    //Get Task by ID
+    public function find()
+    {
+
+        //Query
+        $query = 'SELECT task_id, headline, description, due_date, collaborators, col_draft, solved, created_at FROM ' . $this->table . ' WHERE task_id = :task_id LIMIT 0,1';
+
+        //Prepare statement
+        $stmt = $this->conn->prepare($query);
+
+        //Bind ID
+        $stmt->bindParam(':task_id', $this->task_id);
+
+        //Execute Query
+        $stmt->execute();
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+        //Properties
+
+        $this->task_id = $row['task_id'];
+        $this->headline = $row['headline'];
+        $this->description = $row['description'];
+        $this->due_date = $row['due_date'];
+        $this->collaborators = $row['collaborators'];
+        $this->col_draft = $row['col_draft'];
+        $this->solved = $row['solved'];
+        $this->created_at = $row['created_at'];
+    }
 }
