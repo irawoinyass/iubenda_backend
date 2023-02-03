@@ -176,6 +176,38 @@ class Company
     }
 
 
+    //Get individual record by ID
+
+    public function find()
+    {
+
+        //Query
+        $query = 'SELECT company_id, company_name, company_email, company_phone, company_address, company_website, created_at FROM ' . $this->table . ' WHERE company_id = :company_id LIMIT 0,1';
+
+        //Prepare statement
+        $stmt = $this->conn->prepare($query);
+
+        //Bind ID
+        $stmt->bindParam(':company_id', $this->company_id);
+
+        //Execute Query
+        $stmt->execute();
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+        //Properties
+
+        $this->company_id = $row['company_id'];
+        $this->company_name = $row['company_name'];
+        $this->company_email = $row['company_email'];
+        $this->company_phone = $row['company_phone'];
+        $this->company_address = $row['company_address'];
+        $this->company_website = $row['company_website'];
+        $this->created_at = $row['created_at'];
+    }
+
+
 
 
 
