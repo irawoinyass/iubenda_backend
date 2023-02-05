@@ -208,6 +208,31 @@ class Company
     }
 
 
+    ///get 10 data for dashboard
+
+    public function dashboard_list()
+    {
+
+        //Query
+        $query = 'SELECT company_id, company_name, company_email, company_phone, company_address, company_website, company.created_at, COUNT(DISTINCT people_id) as people, COUNT(DISTINCT t_id) as tasks FROM ' . $this->table . ' LEFT JOIN people ON company_id = com_id LEFT JOIN collaborators ON c_id = company_id GROUP BY company_id ORDER BY company_id DESC LIMIT 0,10';
+
+        //Prepare statement
+
+        $stmt = $this->conn->prepare($query);
+
+        //Execute Query
+
+        $stmt->execute();
+
+        return $stmt;
+
+
+
+        //
+    }
+
+
+
 
 
 

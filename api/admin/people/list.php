@@ -26,7 +26,7 @@ $num = $result->rowCount();
 if ($num > 0) {
 
     //users array
-
+    $row_id = 1;
     $people_arr = array();
     $people_arr['data'] = array();
 
@@ -36,7 +36,7 @@ if ($num > 0) {
         extract($row);
 
         $people_item = array(
-
+            'row_id' => $row_id,
             'people_id' => $people_id,
             'name' => $name,
             'email' => $email,
@@ -50,7 +50,7 @@ if ($num > 0) {
             'created_at' => $created_at
 
         );
-
+        $row_id++;
         //Push to data
 
         array_push($people_arr['data'], $people_item);

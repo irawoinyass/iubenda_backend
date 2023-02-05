@@ -37,9 +37,9 @@ $email = filter_var($data->email, FILTER_SANITIZE_EMAIL);
 
 //Small Validation
 if ($email == "") {
-    echo json_encode(array('message' => 'Email Field is required!'));
+    echo json_encode(array('message' => 'Email field is required!'));
 } else if ($data->password == "") {
-    echo json_encode(array('message' => 'Password Field is required!'));
+    echo json_encode(array('message' => 'Password field is required!'));
 } else if (filter_var($email, FILTER_VALIDATE_EMAIL) == false) {
     echo json_encode(array('message' => 'Invalid email address'));
 } else {
@@ -51,7 +51,7 @@ if ($email == "") {
 
     //Email Address Response
     if ($user->count == 0) {
-        echo json_encode(array('message' => 'Invalid Email Address'));
+        echo json_encode(array('message' => 'Invalid email address'));
     } else {
 
         //Password Verification

@@ -3,33 +3,23 @@
 //Headers
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
-header('Access-Control-Allow-Methods: POST');
-header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods,Authorization,X-Requested-With');
 
 
 include('../../../config/Database.php');
-include('../../../models/people/Task.php');
+include('../../../models/admin/Tasks.php');
 
 //Database Instance
 $database = new Database();
 $db = $database->connect();
 
-//Get Data
-$data = json_decode(file_get_contents("php://input"));
-
-
 //Task Model Instance
-$task = new Task($db);
-
-$task->p_id = $data->p_id;
+$task = new Tasks($db);
 
 //Task Record Query
 $result = $task->list();
 
 //Get Row Count
 $num = $result->rowCount();
-
-//checking if the users table is not empty
 
 if ($num > 0) {
 

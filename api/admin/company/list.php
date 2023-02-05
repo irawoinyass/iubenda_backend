@@ -29,14 +29,14 @@ if ($num > 0) {
 
     $company_arr = array();
     $company_arr['data'] = array();
-
+    $row_id = 1;
     while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
         //extraction
 
         extract($row);
 
         $company_item = array(
-
+            'row_id' => $row_id,
             'company_id' => $company_id,
             'company_name' => $company_name,
             'company_email' => $company_email,
@@ -48,7 +48,7 @@ if ($num > 0) {
             'created_at' => $created_at
 
         );
-
+        $row_id++;
         //Push to data
 
         array_push($company_arr['data'], $company_item);

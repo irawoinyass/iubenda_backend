@@ -24,7 +24,7 @@ $task = new Task($db);
 $task->p_id = $data->p_id;
 
 //Task Record Query
-$result = $task->list();
+$result = $task->dashboard_list();
 
 //Get Row Count
 $num = $result->rowCount();
@@ -34,10 +34,10 @@ $num = $result->rowCount();
 if ($num > 0) {
 
     //users array
-    $row_id = 1;
+
     $task_arr = array();
     $task_arr['data'] = array();
-
+    $row_id = 1;
     while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
         //extraction
 
@@ -53,7 +53,6 @@ if ($num > 0) {
             'col_draft' => $col_draft,
             'solved' => $solved,
             'created_at' => $created_at
-
         );
         $row_id++;
         //Push to data

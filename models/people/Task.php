@@ -226,4 +226,32 @@ class Task
         $this->solved = $row['solved'];
         $this->created_at = $row['created_at'];
     }
+
+
+
+
+    //get 10 recent data
+    public function dashboard_list()
+    {
+
+        //Query
+        $query = 'SELECT task_id, headline, description, due_date, collaborators, col_draft, solved, tasks.created_at, collaborators.p_id FROM ' . $this->table . ' JOIN collaborators ON collaborators.t_id = task_id WHERE collaborators.p_id = :p_id GROUP BY task_id ORDER BY task_id DESC LIMIT 0,10';
+
+        //Prepare statement
+
+        $stmt = $this->conn->prepare($query);
+
+        //Bind
+        $stmt->bindParam(':p_id', $this->p_id);
+
+        //Execute Query
+
+        $stmt->execute();
+
+        return $stmt;
+
+
+
+        //
+    }
 }
