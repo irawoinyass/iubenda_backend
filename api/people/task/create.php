@@ -59,8 +59,10 @@ if ($data->headline == "") {
     //Counting fetch users data to know the actual count of the collaborators
     $total_collaborator = $result->rowCount();
     //countting all existing tasks to dectect the next task id.
-    $count_all_tasks = $task->count_all();
-    $task_id = $count_all_tasks->rowCount() + 1;
+    // $count_all_tasks = $task->count_all();
+    // $task_id = $count_all_tasks->rowCount() + 1;
+    $find_last_id = $task->find_last_id();
+    $task_id = $task->task_id + 1;
 
     //Declaration task data
     $task->headline = $data->headline;
@@ -81,7 +83,7 @@ if ($data->headline == "") {
         $collabo->created_at = date('Y-m-d H:i:s');
         $collabo->create();
         //Ends
-
+        //echo json_encode($row['people_id']);
     }
 
     //Collaborator Ends
@@ -89,6 +91,7 @@ if ($data->headline == "") {
     //
 
     if ($task->create()) {
+
         echo json_encode(array('message' => 'success'));
     } else {
         echo json_encode(array('message' => 'Error, Please Try Again'));

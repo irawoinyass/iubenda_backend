@@ -248,7 +248,7 @@ class People
     {
 
         //Query
-        $query = 'SELECT people_id, name, email, gender, date_of_birth, company_name, com_id, position, account_status, people.created_at, COUNT(DISTINCT t_id) as tasks FROM ' . $this->table . ' JOIN company ON company_id = com_id LEFT JOIN collaborators ON p_id = people_id GROUP BY people_id ORDER BY people_id DESC LIMIT 0,10';
+        $query = 'SELECT people_id, name, email, gender, date_of_birth, com_id, position, account_status, created_at FROM ' . $this->table . ' ORDER BY people_id DESC LIMIT 0,10';
 
         //Prepare statement
 

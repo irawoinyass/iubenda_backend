@@ -34,7 +34,7 @@ $people_result = $people->list();
 //Get total Count
 $people_count = $people_result->rowCount();
 //People Record Query
-$people_dash_result = $people->list();
+$people_dash_result = $people->dashboard_list();
 //Get total Count
 $people_dash_count = $people_dash_result->rowCount();
 
@@ -111,10 +111,8 @@ if ($people_dash_count > 0) {
             'email' => $email,
             'gender' => $gender,
             'date_of_birth' => $date_of_birth,
-            'company_name' => $company_name,
             'com_id' => $com_id,
             'position' => $position,
-            'tasks' => $tasks,
             'account_status' => $account_status,
             'created_at' => $created_at
 

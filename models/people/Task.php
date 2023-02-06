@@ -254,4 +254,25 @@ class Task
 
         //
     }
+
+
+    //find last ID
+    public function find_last_id()
+    {
+
+        //Query
+        $query = 'SELECT task_id FROM ' . $this->table . ' ORDER BY task_id DESC LIMIT 0,1';
+
+        //Prepare statement
+        $stmt = $this->conn->prepare($query);
+        //Execute Query
+        $stmt->execute();
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+        //Properties
+
+        $this->task_id = $row['task_id'];
+    }
 }
